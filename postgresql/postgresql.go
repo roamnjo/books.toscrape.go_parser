@@ -13,7 +13,7 @@ type Storage struct {
 	db *sql.DB
 }
 
-func Connect() (*Storage, error) {
+func Connect() error {
 	connStr := os.Getenv("DB_URL")
 
 	db, err := sql.Open("postgres", connStr)
@@ -40,7 +40,7 @@ func Connect() (*Storage, error) {
 		log.Println(err)
 	}
 
-	return &Storage{db: db}, nil
+	return nil
 }
 
 func (s *Storage) SaveBooks(title, rating, price, link string) (int64, error) {
